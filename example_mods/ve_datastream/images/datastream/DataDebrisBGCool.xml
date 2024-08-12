@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="DataDebrisBGCool.png" width="3802" height="3109">
+  <SubTexture name="0005.png" x="0" y="0"  width="3456" height="1542" frameX="-276" frameY="-0" frameWidth="3840" frameHeight="2158"/>
+  <SubTexture name="0004.png" x="0" y="1542"  width="1818" height="1567" frameX="-29" frameY="-117" frameWidth="3840" frameHeight="2158"/>
+  <SubTexture name="0003.png" x="1818" y="1542"  width="1899" height="1027" frameX="-1800" frameY="-562" frameWidth="3840" frameHeight="2158"/>
+  <SubTexture name="0001.png" x="3456" y="0" width="346" height="1334" rotated="true"  frameX="-1265" frameY="-1166" frameWidth="3840" frameHeight="2158"/>
+  <SubTexture name="0002.png" x="1818" y="2569"  width="860" height="445" frameX="-128" frameY="-424" frameWidth="3840" frameHeight="2158"/>
+</TextureAtlas>

@@ -1,0 +1,13 @@
+{
+	"groupName": "Datastream",
+	"color": "fd719b",
+	"folderIcons": {
+		"rootFolder": "monika-b"
+	},
+	"initFolder": "rootFolder",
+	"categories": {
+		"rootFolder": [
+			["Datastream", "song", "A5004D"]
+		]
+	}
+}

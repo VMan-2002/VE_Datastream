@@ -1,0 +1,549 @@
+FuckassCameraSwitches = [29000, 53560, 54980, 56900, 76500, 149000, 1836500]; //didnt even know the song was 5/4, this is some fucked up shit
+//but does it even worK!!!!!!! aaaaaaaa!!!!!!!!!!
+
+function statePostInit() {
+	trace("Datastream init");
+	Datastream.screenCapture("first");
+	window = Datastream.getWindow();
+	baseWindowX = window.x;
+	baseWindowY = window.y;
+	baseWindowWidth = window.width;
+	baseWindowHeight = window.height;
+	baseWindowMaximized = window.maximized;
+	Datastream.scaleMode("noletterbox");
+
+	transbehind = new FlxSprite(0, 0);
+	transbehind.makeGraphic(64, 64, MyFlxColor.fromRGB(1, 1, 1, 255));
+	FlxG.state.insert(0, transbehind);
+	transbehind.scale.set(99, 99);
+	
+	fullgone = new FlxSprite(0, 0);
+	fullgone.makeGraphic(64, 64, MyFlxColor.fromRGB(1, 1, 1, 255));
+	FlxG.state.overlayGroup.add(fullgone);
+	fullgone.scale.set(99, 99);
+	fullgone.scrollFactor.set();
+	fullgone.cameras = [PlayState.instance.camHUD, FlxG.camera];
+	//fullgone.visible = false;
+	fullgone.screenCenter();
+	fullgone.color = 0xFF000000;
+	
+	frames = 0;
+	beatTime = Conductor.crochet / 1000;
+	
+	gscan = new FlxSprite(0, 0, Paths.image("datastream/gscan"));
+	gscan.scale.x = gscan.scale.y = 1920 / 1280;
+	gscan.scrollFactor.set();
+	gscan.cameras = [PlayState.instance.camHUD];
+	FlxG.state.overlayGroup.add(gscan);
+	gscan.visible = false;
+	
+	screenCap = new FlxSprite(0, 0);
+	screenCap.scrollFactor.set();
+	FlxG.state.overlayGroup.add(screenCap);
+	screenCap.visible = false;
+	screenGlitch = Datastream.screenGlitchShader();
+	screenCap.shader = screenGlitch;
+	screenGlitch.vert.value[0] = 1.0;
+	
+	hudGlitch = Datastream.screenGlitchShader();
+	hudGlitch.vert.value[0] = -1.0;
+	hudGlitch.xm.value[0] = 0.003;
+	
+	moniGlitch = Datastream.screenGlitchShader();
+	moniGlitch.vert.value[0] = -1.0;
+	moniGlitch.xm.value[0] = 0.003;
+	PlayState.instance.dad.shader = moniGlitch;
+	
+	bwOutline = Datastream.outlineShader();
+	PlayState.instance.boyfriend.shader = bwOutline;
+	bwOutline.setOutline(1.0, 1.0, 1.0, null);
+	
+	redOutline = Datastream.outlineShader();
+	redOutline.setOutline(1.0, 0.0, 0.0, null);
+	
+	fuckOutline = Datastream.outlineShader();
+	fuckOutline.setOutline(1.0, 0.0, 0.0, null);
+	fuckOutline.setFill(1/255, 1/255, 1/255, null);
+	
+	PlayState.instance.defaultCamZoom = 0.7;
+	
+	for (thing in PlayState.instance.hudThings) {
+		thing.members[0].font = Paths.font("SourceCodePro-Regular.ttf");
+		thing.members[0].scale.set(0.8, 0.8);
+		switch(PlayState.instance.hudThings.members.indexOf(thing)) {
+			case 1:
+				thing.members[0].y -= 16;
+		}
+	}
+	
+	if (!Options.instance.playstate_bothside) {
+		for (line in PlayState.instance.strumLines) {
+			if (Options.instance.playstate_opponentmode) {
+				line.x = FlxG.width - line.x;
+				PlayState.instance.leftStrums = PlayState.instance.dadStrums;
+				PlayState.instance.rightStrums = PlayState.instance.bfStrums;
+			}
+			var xo = (line.strumNotes.length * -0.5) + 0.5;
+			xo += (line.x > FlxG.width / 2) ? 0.5 : -0.5;
+			for (spr in line.strumNotes) {
+				var i = line.strumNotes.indexOf(spr);
+				spr.x = line.x + ((i + xo) * 90);
+				spr.y += Options.downScroll ? 10 : -10;
+				spr.scale.x *= 0.8;
+				spr.scale.y = spr.scale.x;
+			}
+			line.overrideDefaultWithCurrent();
+		}
+		noteScale = 0.8;
+	} else {
+		var line = PlayState.instance.playerStrums;
+		var xo = (line.strumNotes.length * -0.5) + 0.5;
+		for (spr in line.strumNotes) {
+			var i = line.strumNotes.indexOf(spr);
+			spr.x = line.x + ((i + xo) * 65);
+			spr.y += Options.downScroll ? 10 : -10;
+			spr.scale.x *= 0.9;
+			spr.scale.y = spr.scale.x;
+		}
+		noteScale = 0.9;
+	}
+	FlxG.camera.zoom = 1080/1280;
+	
+	//Terminals
+	FlxG.state.add(moniFrontTerminals = new FlxTypedGroup());
+	FlxG.state.insert(FlxG.state.members.indexOf(PlayState.instance.dad), moniBackTerminals = new FlxTypedGroup());
+	for (f in [[0,0,2,4],[1],[3],[5],[6]]) {
+		trace("terminal"+f[0]);
+		var term = null;
+		if (f[0] <= 1)
+			term = moniBackTerminals.add(new FlxSprite());
+		else
+			term = moniFrontTerminals.add(new FlxSprite());
+		term.loadGraphic(Paths.image("datastream/terminals"), true, 180, 160);
+		term.animation.add("idle", f, 10, true);
+		term.animation.add("bad", [f[0] + 8], 10, true);
+		term.animation.play("idle");
+		term.visible = false;
+	}
+	terminalArray = moniBackTerminals.members.concat(moniFrontTerminals.members);
+	terminalArray[0].setPosition(-120, 160);
+	terminalArray[1].setPosition(280, 120);
+	terminalArray[2].setPosition(240, 340);
+	terminalArray[3].setPosition(350, 280);
+	terminalArray[4].setPosition(-150, 360);
+}
+
+function onSpawnNote(note) {
+	note.scale.x *= noteScale;
+	if (!note.isSustainNote || StringTools.endsWith(note.animation.curAnim.name, "holdend")) {
+		note.scale.y *= noteScale;
+	}
+}
+
+curStageType = "a";
+function _stageType(n, color) {
+	for (i in [5, 1, 2, 3, 4]) {
+		if (curStageType != n) {
+			PlayState.instance.currentStage.elementsNamed.get(i + curStageType).visible = false;
+			PlayState.instance.currentStage.elementsNamed.get(i + n).visible = true;
+		}
+		PlayState.instance.currentStage.elementsNamed.get(i + n).color = color;
+	}
+	curStageType = n;
+}
+
+songStart = false;
+modScreenShader = false;
+modScreenShader2 = false;
+letShake = false;
+photosensitive = !Options.flashingLights;
+screenBack = 0;
+
+sTimes = [
+	//intro
+	5581, 6017, 6453, 6715,
+	5581+1395, 6017+1395, 6453+1395, 6715+1395,
+	5581+2791, 6017+2791, 6453+2791, 6715+2791,
+	5581+4186, 6017+4186, 6453+4186, 6715+4186, 5581+4186+1395
+];
+sTimeNum = 0;
+sIdleTimer = 0;
+sIdleNeed = (photosensitive ? 6 : 2) / 60;
+letScreenGo = false;
+screenGoFreq = 1;
+screenGoFreqBase = photosensitive ? 40 : 16;
+TearDiv = 90;
+ShiftMult = 0.9;
+HudTear = 1;
+Disintegrate = 0;
+DisintegrateTotal = 0;
+
+function update() {
+	/*frames += 1;
+	if (frames == 4) {
+		firstScreencap = true;
+	}*/
+	if (!songStart) {
+		fullgone.color = 0xFFFFFFFF;
+		if (Conductor.songPosition >= 0) {
+			songStart = true;
+			_gscanFunc(0.3);
+			
+			
+			Datastream.setTransWindow(true);
+			Datastream.setBorderless(true);
+			window.maximized = false;
+			window.x = 0;
+			window.y = 0;
+			window.width = Datastream.screenResolution.x + 1;
+			window.height = Datastream.screenResolution.y;
+			FlxG.mouse.useSystemCursor = true;
+		}
+	} else if (FuckassCameraSwitches.length != 0 && FuckassCameraSwitches[0] <= Conductor.songPosition) {
+		PlayState.instance.camFollowSetOnCharacter(PlayState.instance.focusCharacter == PlayState.instance.dad ? PlayState.instance.boyfriend : PlayState.instance.dad, true, true, true);
+	}
+	if (gscan.visible && !photosensitive) {
+		gscan.flipX = !gscan.flipX;
+		if (gscan.flipX) {
+			gscan.flipY = !gscan.flipY;
+		}
+	}
+	
+	if (modScreenShader) {
+		if (screenGlitch.vert.value[0] > -1)
+			screenGlitch.vert.value[0] -= FlxG.elapsed * 3;
+		screenGlitch.tearamount.value[0] += FlxG.elapsed / (photosensitive ? 4 : 1);
+		if (screenGlitch.tearamount.value[0] > 0.1)
+			screenGlitch.tearamount.value[0] = photosensitive ? 0.07 : 0.03;
+		if (Math.random() > FlxG.elapsed * 50) {
+			screenGlitch.o.value[0] += Math.random() / (photosensitive ? 250 : 1);
+			screenGlitch.xm.value[0] += 0.01;
+		}
+	} else if (modScreenShader2) {
+		if (!photosensitive) {
+			sIdleTimer += Math.random() * FlxG.elapsed;
+			if (sIdleTimer > sIdleNeed) {
+				sIdleTimer -= sIdleNeed;
+				_screenShaderThing();
+			}
+		}
+		if (letScreenGo && Math.random() > FlxG.elapsed * 40) {
+			screenBack += 1;
+			if (screenBack > screenGoFreqBase / screenGoFreq) {
+				screenBack = 0;
+				Datastream.setTransWindow(!Datastream.transparent);
+			}
+		}
+	}
+	
+	if (sTimeNum != -1) {
+		if (Conductor.songPosition >= sTimes[sTimeNum]) {
+			if (sTimeNum <= 15) {
+				if (sTimeNum <= 7) {
+					screenGlitch.bprob.value[0] += 0.04;
+				} else {
+					screenGlitch.bprob.value[0] += 0.086;
+					if (sTimeNum == 12 && (Options.instance.playstate_bothside || Options.instance.playstate_opponentmode)) {
+						fullgone.visible = false;
+						FlxG.state.overlayGroup.remove(screenCap, true);
+						FlxG.state.insert(FlxG.state.members.indexOf(PlayState.instance.strumLines), screenCap);
+						PlayState.instance.opponentStrums.visible = false;
+						PlayState.instance.strumLines.visible = true;
+						PlayState.instance.notes.visible = true;
+					}
+				}
+				var oldScale = screenCap.scale.y;
+				screenCap.scale.x = screenCap.scale.y = oldScale * (photosensitive ? 0.99 : 0.96);
+				FlxTween.tween(screenCap.scale, {x: oldScale * (0.99 + (sTimeNum * 0.0006)), y: oldScale}, 0.1, {ease: Scripting.ease("expoout")});
+			} else if (sTimeNum == 16) {
+				PlayState.instance.iconP1.visible = PlayState.instance.iconP2.visible = PlayState.instance.healthBar.visible = PlayState.instance.healthBarBG.visible = PlayState.instance.hudThings.visible = PlayState.instance.strumLines.visible = PlayState.instance.opponentStrums.visible = PlayState.instance.notes.visible = true;
+				screenGlitch.bprob.value[0] = 0.0;
+			}
+			if ((sTimeNum += 1) == sTimes.length) {
+				sTimeNum = -1;
+			}
+		}
+	}
+}
+
+function _screenShaderThing() {
+	DisintegrateTotal += Disintegrate;
+	if (photosensitive) {
+		screenGlitch.xm.value[0] = (0.075 + (Math.random() * 0.01)) * (ShiftMult / 4);
+		hudGlitch.tearamount.value[0] = (((1 / 120) + (Math.random() / (TearDiv * 2))) * HudTear) / 3;
+		screenGlitch.tearamount.value[0] = ((8 + (Math.random() / TearDiv)) / 1205) + (DisintegrateTotal / 22);
+		hudGlitch.xm.value[0] = 0.001 + (Math.random() * 0.001);
+	} else {
+		screenGlitch.xm.value[0] = ((0.06 + (Math.random() * 0.04)) * ShiftMult) + (DisintegrateTotal / 3);
+		hudGlitch.o.value[0] += Math.random();
+		hudGlitch.tearamount.value[0] = (Math.random() / TearDiv) * HudTear;
+		screenGlitch.tearamount.value[0] = ((2 + (Math.random() / TearDiv)) / 305) + (DisintegrateTotal / 6);
+		//trace(screenGlitch.tearamount.value[0]);
+		hudGlitch.xm.value[0] = (Math.random() * 0.002);
+	}
+	//moniGlitch.tearamount.value[0] += Disintegrate / 2;
+	//moniGlitch.xm.value[0] += Disintegrate / 2;
+}
+
+function _gscanFunc(time) {
+	gscan.visible = true;
+	gscan.y = -gscan.frameHeight * gscan.scale.y;
+	gscan.scale.x = Math.max(1, (FlxG.width / FlxG.height) / 1.4);
+	FlxTween.tween(gscan, {y: FlxG.height + (gscan.frameHeight * (gscan.scale.y - 1))}, time, {onComplete: function() {
+		gscan.visible = false;
+	}});
+}
+
+function _setScreencap(name) {
+	screenCap.loadGraphic(Datastream.getContentPNG(name));
+	screenCap.setGraphicSize(-1, FlxG.height);
+	screenCap.scale.x *= 0.99;
+	screenCap.screenCenter();
+}
+
+hdrain = 0.1;
+isCloseup = false;
+
+function _changeCloseup(n) {
+	if (n != isCloseup) {
+		isCloseup = n;
+		if (n) {
+			PlayState.instance.dad.changeCharacter("monika-ds-front");
+			PlayState.instance.boyfriend.visible = false;
+			FlxG.camera.zoom += 0.35;
+			PlayState.instance.defaultCamZoom += 0.3;
+			PlayState.instance.camFollowSetOnCharacter(PlayState.instance.dad, true, true, true);
+			PlayState.instance.camFollowPos.setPosition(PlayState.instance.camFollow.x, PlayState.instance.camFollow.y);
+			moniFrontTerminals.visible = moniBackTerminals.visible = false;
+		} else {
+			PlayState.instance.dad.changeCharacter("monika-ds");
+			PlayState.instance.boyfriend.visible = true;
+			FlxG.camera.zoom -= 0.2;
+			PlayState.instance.defaultCamZoom -= 0.3;
+			moniFrontTerminals.visible = moniBackTerminals.visible = true;
+		}
+	}
+}
+
+function beatHit(n) {
+	if (PlayState.instance.subState == null)
+		PlayState.instance.health -= (PlayState.instance.health > 1 ? 0.035 : 0.01) * hdrain;
+	if (modScreenShader2 && photosensitive && Math.random() > 0.25) {
+		_screenShaderThing();
+	}
+	//Intro
+	if (n == 1) {
+		Datastream.screenCapture("first");
+		FlxG.camera.zoom = 1;
+		_setScreencap("first");
+		screenCap.visible = true;
+		fullgone.cameras = [FlxG.camera];
+		Datastream.setTransWindow(false);
+		modScreenShader = true;
+		FlxG.mouse.visible = false;
+		camMid = true;
+		onResize(FlxG.width, FlxG.height);
+		
+		PlayState.instance.opponentStrums.visible = PlayState.instance.strumLines.visible = PlayState.instance.iconP1.visible = PlayState.instance.iconP2.visible = PlayState.instance.healthBar.visible = PlayState.instance.healthBarBG.visible = PlayState.instance.hudThings.visible = PlayState.instance.notes.visible = false;
+	} else if (n == 16) {
+		//preload the closeup sheet
+		new Character(0, 0, "monika", false, "ve_datastream", false).destroy();
+		//and sync vocals
+		PlayState.instance.resyncVocals();
+	} else if (n == 32) {
+		fullgone.visible = false;
+		screenCap.visible = false;
+		FlxG.camera.zoom = 2;
+		modScreenShader = false;
+		modScreenShader2 = true;
+		PlayState.instance.camHUD.flash(0x171B22, 0.6);
+		FlxG.mouse.visible = true;
+		screenGlitch.xm.value[0] = 0.08;
+		letShake = true;
+		FlxG.mouse.useSystemCursor = false;
+		
+		FlxG.camera.setFilters([new ShaderFilter(screenGlitch)]);
+		PlayState.instance.camHUD.setFilters([new ShaderFilter(hudGlitch)]);
+		
+		if (Options.instance.playstate_opponentmode || Options.instance.playstate_bothside) {
+			PlayState.instance.camZooming = true;
+		} else {
+			PlayState.instance.camHUD.zoom = 1.5;
+		}
+		PlayState.instance.defaultCamZoom = 0.9;
+		hdrain = 1;
+	}
+	//Mid events
+	if (n == 104 || n == 264) {
+		PlayState.instance.dad.shader = bwOutline;
+		_stageType("b", 0xFFFFFFFF);
+		if (n == 104) {
+			_terminalTween(1, 120 + (Math.random() * 130), beatTime * 2, {ease: Scripting.ease(Math.random() > 0.5 ? "cubeOut" : "quadOut")}, beatTime * 1.1);
+			TearDiv = 4000;
+			ShiftMult = 0.001;
+			HudTear = 0.2;
+		} else {
+			TearDiv = 120;
+			ShiftMult = 0.3;
+			HudTear = 0.8;
+		}
+	} else if (n == 168) {
+		PlayState.instance.dad.shader = null;
+		_stageType("a", 0xFFFFFFFF);
+		TearDiv = 100;
+		ShiftMult = 0.95;
+		HudTear = 1.1;
+	} else if (n == 360) {
+		PlayState.instance.dad.shader = redOutline;
+		PlayState.instance.boyfriend.shader = redOutline;
+		_changeTerminalColor(0xFFFF0000, true);
+		_stageType("b", 0xFFFF0000);
+		TearDiv = 620;
+		hdrain = 1.5;
+		ShiftMult = 0.4;
+		HudTear = 1.2;
+		_changeCloseup(true);
+	} else if (n == 372 || n == 374 || n == 376) {
+		letScreenGo = true;
+		screenGoFreq = 6;
+		TearDiv = 40;
+		ShiftMult = 1.6;
+		HudTear = 5;
+		if (n == 376) {
+			screenGoFreq = 1.5;
+			TearDiv = 100;
+			for (i in [1,2,3,4]) {
+				PlayState.instance.currentStage.elementsNamed.get(i + "a").alpha = 0.2;
+				PlayState.instance.currentStage.elementsNamed.get(i + "b").alpha = 0.2;
+			}
+			ShiftMult = 1.1;
+			HudTear = 3;
+			hdrain = 1.8;
+			PlayState.instance.defaultCamZoom = 0.9;
+			_changeCloseup(false);
+		}
+	} else if (n == 373 || n == 375) {
+		letScreenGo = false;
+		Datastream.setTransWindow(false);
+		TearDiv = 550;
+		ShiftMult = 0.7;
+		HudTear = 0.4;
+	} else if (n == 504) {
+		HudTear = 4;
+		PlayState.instance.defaultCamZoom = 0.7;
+	} else if (n == 549) {
+		HudTear = 4.2;
+		PlayState.instance.defaultCamZoom = 1;
+	} else if (n == 560) {
+		HudTear = 4.4;
+		PlayState.instance.defaultCamZoom = 1.2;
+	} else if (n == 572) {
+		HudTear = 3;
+		PlayState.instance.defaultCamZoom = 1.3;
+		_changeCloseup(true);
+	} else if (n == 588 || n == 658) {
+		HudTear = 0.2;
+		PlayState.instance.defaultCamZoom = 2;
+		if (n == 658) {
+			_changeCloseup(true);
+		}
+	} else if (n == 594) {
+		HudTear = 1.4;
+		_changeCloseup(false);
+	} else if (n == 662) {
+		HudTear = 1;
+	} else if (n == 674) {
+		HudTear = photosensitive ? 6 : 12;
+		Disintegrate = photosensitive ? 0.5 : 1.2;
+	} else if (n == 682) {
+		HudTear = photosensitive ? 12 : 30;
+		PlayState.instance.dad.shader = fuckOutline;
+	} else if (n == 686) {
+		TearDiv /= photosensitive ? 1.2 : 2;
+		ShiftMult *= photosensitive ? 1.2 : 2;
+		HudTear /= 2;
+	}
+	//Cam zooms
+	if (n == 48 || n == 264) {
+		PlayState.instance.defaultCamZoom = 1;
+	} else if (n == 64 || n == 168 || n == 240 || n == 296 || n == 376) {
+		PlayState.instance.defaultCamZoom = 0.7;
+	} else if (n == 94 || n == 223 || n == 248 || n == 280 || n == 344 || n == 376 || n == 408) {
+		PlayState.instance.defaultCamZoom = 0.85;
+	} else if (n == 102 || n == 326 || n == 358) {
+		_camZoomTween(false, 1.3, beatTime * 2, {ease: Scripting.ease("quartIn")});
+		PlayState.instance.defaultCamZoom = 0.9;
+	}
+	//Switch to/from closeup sprites (if i get them in time)
+	//if (n == 656) {
+	//	_changeCloseup(true);
+	//}
+	
+	//Ambient
+	if (letShake) {
+		if (photosensitive) {
+			FlxG.camera.shake(0.002, Conductor.crochet / 2200);
+			PlayState.instance.camHUD.shake(0.001, Conductor.crochet / 2100);
+		} else {
+			FlxG.camera.shake(0.005, Conductor.crochet / 1800);
+			PlayState.instance.camHUD.shake(0.003, Conductor.crochet / 1600);
+		}
+	}
+}
+
+function _camZoomTween(isHud, zoom, time, opt) {
+	FlxTween.tween(isHud ? PlayState.instance.camHUD : FlxG.camera, {zoom: zoom}, time, opt);
+}
+
+function _terminalTween(alp, yOff, time, opt, timevariation) {
+	for (thing in terminalArray) {
+		thing.visible = true;
+		var oldy = thing.y;
+		thing.y += yOff;
+		FlxTween.tween(thing, {alpha: alp, y: oldy}, time + (Math.random() * timevariation), opt);
+	}
+}
+
+function _changeTerminalColor(newcol, bad) {
+	for (thing in terminalArray) {
+		thing.color = newcol;
+		thing.animation.play(bad ? "bad" : "idle");
+	}
+}
+
+function destroy() {
+	trace("Datastream close");
+	Datastream.scaleMode("");
+	window.x = baseWindowMaximized ? (Datastream.screenResolution.x - 1280) / 2 : baseWindowX;
+	window.y = baseWindowMaximized ? (Datastream.screenResolution.y - 720) / 2 : baseWindowY;
+	window.width = baseWindowMaximized ? 1280 : baseWindowWidth;
+	window.height = baseWindowMaximized ? 720 : baseWindowHeight;
+	window.maximized = false;
+	Datastream.setTransWindow(false);
+	Datastream.setBorderless(false);
+	FlxG.mouse.visible = true;
+	FlxG.mouse.useSystemCursor = false;
+}
+
+screenGlitch = null;
+camMid = false;
+
+function onResize(w, h) {
+	trace('onresize $w $h');
+	trace("new cam x: "+PlayState.instance.camHUD.x);
+	FlxG.camera.follow(PlayState.instance.camFollowPos, null, 1);
+	
+	PlayState.instance.camHUD.x = camMid ? (FlxG.width - 1280) / 2 : 0;
+	
+	if (screenGlitch != null) {
+		screenGlitch.setGameAspect();
+		hudGlitch.setGameAspect();
+		fullgone.screenCenter();
+	}
+}
+
+function substatePostInit(name) {
+	if (name == "GameOverSubstate") {
+		killScript();
+	}
+}

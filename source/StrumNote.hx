@@ -1,0 +1,180 @@
+package;
+
+import CoolUtil;
+import Note.SwagNoteSkin;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxTimer;
+
+class StrumNote extends FlxSprite
+{
+	public var noteData:Int;
+	public var isHeld(default, set):Bool = false;
+	public var parent:StrumLine;
+	function set_isHeld(invar:Bool):Bool {
+		if (invar == isHeld) {
+			return isHeld;
+		}
+		if (invar) {
+			if (animation.curAnim.name == "static") {
+				playAnim("pressed");
+			}
+			if (returnTime < 0) {
+				returnTime = 0;
+			}
+		}
+		isHeld = invar;
+		return invar;
+	}
+	public var curStyle:String;
+	public var myArrow:String;
+	
+	public var returnTime:Float = -60;
+
+	public var speedMult:Float = 1;
+	public var downScroll:Bool; //todo: use this
+	public var baseRot:Float = 0;
+	
+	public var keybindReminder:FlxText;
+
+	public var defaultX:Float;
+	public var defaultY:Float;
+
+	public function new(x:Float, y:Float, noteData:Int, style:String, parent:StrumLine) {
+		super(x, y);
+		defaultX = x;
+		defaultY = y;
+		moves = false;
+		this.noteData = noteData;
+		this.parent = parent;
+		downScroll = Options.instance.downScroll;
+		setStyle(style);
+		scrollFactor.set();
+	}
+	
+	override function update(elapsed:Float) {
+		super.update(elapsed);
+		if (returnTime == -60) {
+			CoolUtil.CenterOffsets(this);
+			return;
+		}
+		if (!isHeld && returnTime >= 0) {
+			returnTime -= elapsed;
+			if (returnTime < 0) {
+				playAnim("static");
+			}
+		}
+		if (animation.curAnim.name == "appear" && animation.curAnim.finished) {
+			playAnim(isHeld ? "press" : "static");
+		}
+	}
+	
+	public function setStyle(style:String) {
+		myArrow = parent.thisManiaInfo.arrows[noteData];
+		var myStrumArrow = ManiaInfo.StrumlineArrow[myArrow];
+		curStyle = style;
+		if (style == "" || style == null)
+			curStyle = "normal";
+		switch(curStyle) {
+			/*case "pixel":
+				frames = Paths.getSparrowAtlas('pixelUI/NOTE_assets-pixel');
+
+				scale.x = PlayState.daPixelZoom * 1.5;
+				antialiasing = false;
+				
+				animation.addByPrefix('appear', "appear"+myStrumArrow, 6, false);
+				animation.addByPrefix('static', "arrow"+myStrumArrow, 24, true);
+				animation.addByPrefix('pressed', myArrow+' press', 12, false);
+				animation.addByPrefix('confirm', myArrow+' confirm', 24, false);
+			
+			case "normal" | "" | null:
+				frames = Paths.getSparrowAtlas('normal/NOTE_assets');
+
+				antialiasing = true;
+				
+				animation.addByPrefix('static', "arrow"+myStrumArrow, 24, true);
+				animation.addByPrefix('pressed', myArrow+' press', 24, false);
+				animation.addByPrefix('confirm', myArrow+' confirm', 24, false);*/
+
+			default:
+				//load custom
+				var noteSkin:SwagNoteSkin = SwagNoteSkin.loadNoteSkin(curStyle, PlayState.modName);
+				//frames = Paths.getSparrowAtlas(noteSkin.image);
+				frames = FlxAtlasFrames.fromSparrow(Paths2.image(noteSkin.image, "shared/images/"), Paths.file('images/${noteSkin.image}.xml'));
+
+				if (noteSkin.arrows == null) {
+					animation.addByPrefix('static', "arrow"+myStrumArrow, 24, true);
+					animation.addByPrefix('pressed', myArrow+' press', 24, false);
+					animation.addByPrefix('confirm', myArrow+' confirm', 24, false);
+				} else {
+					for (anim in noteSkin.arrows[myArrow]) {
+						animation.addByPrefix(
+							'${anim.name}',
+							'${anim.anim}',
+							anim.framerate,
+							anim.loop
+						);
+						//trace('strum arrow ${myArrow} add animation ${anim.name}');
+					}
+				}
+				antialiasing = noteSkin.antialias != false;
+				scale.x = noteSkin.scale;
+		}
+		
+		scale.x *= parent.thisManiaInfo.scale * parent.scale;
+		scale.y = scale.x;
+		scrollFactor.set();
+		animation.play("static");
+		dirty = true; //i dont care
+		CoolUtil.CenterOffsets(this);
+	}
+
+	public function playAppearAnim(?delay:Float = 0) {
+		alpha = 0;
+		new FlxTimer().start(delay, function(timer) {
+			if (animation.getNameList().contains("appear")) {
+				playAnim("appear");
+				alpha = 1;
+			} else {
+				playAnim("static");
+				FlxTween.tween(this, {alpha: 1}, 1, {ease: FlxEase.circOut});
+			}
+		});
+	}
+	
+	public function playAnim(name:String, ?force:Bool = false) {
+		if (name == animation.curAnim.name && !force)
+			return;
+		animation.play(name, force);
+		updateHitbox();
+		centerOffsets();
+		CoolUtil.CenterOffsets(this);
+	}
+	
+	public function showKeybindReminder() {
+		destroyKeybindReminder();
+		keybindReminder = new FlxText(x - 80, y, 160, ControlsSubState.ConvertKey(parent.thisManiaInfo.control_set[noteData][0]), 10);
+		keybindReminder.alignment = CENTER;
+		parent.add(keybindReminder);
+		FlxTween.tween(keybindReminder, {alpha: 0, "scale.x": 0}, 1, {startDelay: 2, onComplete: function(tw) {
+			destroyKeybindReminder();
+		}, ease: FlxEase.circOut});
+	}
+	
+	public inline function destroyKeybindReminder() {
+		if (keybindReminder != null) {
+			FlxTween.cancelTweensOf(keybindReminder);
+			parent.remove(keybindReminder, true).destroy();
+			keybindReminder = null;
+		}
+	}
+	
+	override function destroy() {
+		destroyKeybindReminder();
+		super.destroy();
+	}
+}

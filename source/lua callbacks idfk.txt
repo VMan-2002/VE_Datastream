@@ -1,0 +1,178 @@
+Lua callbacks that are not implemented yet
+todo: implement these
+
+onInit(stateName)
+- runs when the lua script is loaded. not all variables have been set yet.
+= stateName: the name of the state being loaded
+
+onPostInit(stateName)
+- runs after the entire state has loaded.
+= stateName: the name of the state being loaded
+
+onLuaBroadcast(value, modName, path)
+- runs when another lua script calls luaBroadcast.
+= value: the value that was broadcasted.
+= modName: the id of the origin script's mod.
+= path: the path to the lua file.
+> return any value to return that value in the original luaBroadcast call.
+
+onUpdate(elapsed)
+- runs at the start every frame.
+= elapsed: amount of time since the last frame
+
+onPostUpdate(elapsed)
+- runs at the end of every frame.
+= elapsed: amount of time since the last frame
+
+onDestroy(stateName)
+- runs before exiting the state, after stuff gets unloaded.
+= stateName: the name of the state being unloaded
+
+onGameClosed()
+- runs when the game is closed.
+
+onFullscreen(value)
+- runs when fullscreen is toggled.
+= value: true if you're now in fullscreen, false otherwise
+
+onKeyPressed(key, char)
+- runs when a key is pressed.
+= key: id of the key
+= char: char code of the key
+
+onKeyReleased(key, char)
+- runs when a key is released.
+= key: id of the key
+= char: char code of the key
+
+== PlayState specific
+
+onNoteHit(id, notedata, noteType, mustPress, character)
+- runs when a note is hit.
+= id: the ID of the note.
+= notedata: the lane of the note, starting from 0.
+= noteType: the name of this note's type.
+= mustPress: true if this is a player's note. false if it's an opponent's note.
+= character: the ID of the visual character that will animate when this note is hit.
+> return false to prevent hitting the note.
+> return a string "sick", "good", "bad" or "shit" to force that rating.
+> return a number 1-0 to force a rating based on what rating would normally be hit on that offset.
+
+onNoteMiss(id, notedata, noteType, mustPress, character)
+- runs when a note is missed.
+= id: the ID of the note. is -1 if it was a miss-press.
+= notedata: the lane of the note, starting from 0.
+= noteType: the name of this note's type.
+= mustPress: true if this is a player's note. false if it's an opponent's note. unless the note type is missable by the opponent, this will always be true in singleplayer
+= character: the ID of the visual character that will animate when this note is missed.
+> return false to not count as a miss.
+
+goodNoteHit(id, notedata, noteType, rating, character)
+- same as onNoteHit, but only for the player's notes.
+= rating: "sick", "good", "bad" or "shit" corrosponding with the accuracy
+
+onCountdownStart()
+- runs when the countdown starts.
+> return true to skip the countdown.
+> return a number to wait for an amount of time, so you can play a custom countdown animation.
+> return false to prevent starting the countdown.
+
+onCountdownTick(num)
+- runs for each tick of the countdown.
+= num: the current tick of the countdown, 0-3 in order of 3, 2, 1, go.
+> return false to not display this tick.
+
+onSongStart()
+- runs when the countdown finishes and the song starts.
+
+onSongEnd()
+- runs when the song ends.
+> return false to prevent the next song from starting or returning to the menu.
+
+onUpdateModchart(elapsed)
+- same as onPostUpdate.
+- not called if modchart is disabled in options.
+
+onGameOverCheck()
+- called when the player takes fatal damage in some way.
+> return false to prevent death
+
+onGameOver()
+- called when the player dies.
+> return false to skip hide the game over screen.
+
+onPressSeven()
+- called when the player presses 7 to open the charting state.
+> return false to prevent the charting state from opening.
+
+onPause()
+- called when the player pauses the game.
+> return false to prevent pausing.
+
+== Dialogue specific
+
+onDialogueStart(path)
+- called when dialogue starts.
+= path: the path of the dialogue file.
+> return false to prevent dialogue starting.
+
+onDialogueLine(n)
+- called when a dialogue line is progressed.
+= n: the page number of the dialogue.
+
+onDialogueEnd()
+- called when dialogue ends.
+> return false to prevent what happens next.
+
+== Menu specific
+
+onChangeSelection(n, name, last)
+- runs when the player selects a different item.
+= n: the id of the item that was selected.
+= name: the name of the item that was selected.
+= last: the item that was selected previously.
+
+onChangeDifficulty(n, name, last)
+- runs when the player changes the difficulty.
+= n: the id of the difficulty that was selected.
+= name: the new selected difficulty.
+= last: the old selected difficulty.
+
+onAccept(n, name)
+- runs when the player presses Accept.
+= n: the id of the item to accept, if any.
+= name: the name of the item that was accepted, if any.
+> return false to prevent selection.
+
+onCancel()
+- runs when the player presses Cancel (aka Back).
+> return false to prevent cancellation.
+
+onModFolderEntered(modName)
+- runs when a main mod folder is entered in Freeplay menu.
+= modName: the name of the mod that was entered.
+
+onModFolderExited(modName)
+- runs when a main mod folder is exited in Freeplay menu.
+= modName: the name of the mod that was exited.
+
+onFolderEntered(folderName, path, modName)
+- runs when a subfolder is entered in Freeplay menu.
+= folderName: the name of the subfolder that was entered.
+= path: the full path
+= modName: the name of the mod this folder belongs to.
+> return false to prevent entering the folder.
+
+onFolderExited(folderName, path, modName)
+- runs when a subfolder is exited in Freeplay menu.
+= folderName: the name of the subfolder that was exited.
+= path: the full path
+= modName: the name of the mod this folder belongs to.
+> return false to prevent exiting the folder.
+
+onGenerateSongList(list, folderPath, modName)
+- runs when the song list is generated in Freeplay, including when navigating folders.
+= list: the list of songs that will be generated.
+= folderPath: the full path of the folder that is being generated.
+= modName: the name of the mod this folder belongs to.
+> return a list of songs to override the song list.
