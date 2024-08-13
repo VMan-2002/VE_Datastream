@@ -1,4 +1,5 @@
 On Error Resume Next
+' I didn't end up implementing this
 
 Dim WshShell, oExec
 Set WshShell = CreateObject("WScript.Shell")

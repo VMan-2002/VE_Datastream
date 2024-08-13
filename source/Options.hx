@@ -244,7 +244,7 @@ class Options {
 	}
 	
 	public static function LoadOptions() {
-		letUseModchart = File.getContent("assets/data/letUseModchart") == "1";
+		letUseModchart = File.getContent("assets/data/letUseModchart.txt") == "1";
 		saved = new Options();
 		var svd = GetSaveObj();
 		masterVolume = ifNotNull(svd.data.masterVolume, masterVolume);

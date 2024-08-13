@@ -11,6 +11,9 @@ function statePostInit() {
 	baseWindowHeight = window.height;
 	baseWindowMaximized = window.maximized;
 	Datastream.scaleMode("noletterbox");
+	
+	trace("UI style");
+	trace(PlayState.SONG.uiStyle);
 
 	transbehind = new FlxSprite(0, 0);
 	transbehind.makeGraphic(64, 64, MyFlxColor.fromRGB(1, 1, 1, 255));
