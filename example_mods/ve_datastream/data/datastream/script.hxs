@@ -348,9 +348,13 @@ function beatHit(n) {
 		onResize(FlxG.width, FlxG.height);
 		
 		PlayState.instance.opponentStrums.visible = PlayState.instance.strumLines.visible = PlayState.instance.iconP1.visible = PlayState.instance.iconP2.visible = PlayState.instance.healthBar.visible = PlayState.instance.healthBarBG.visible = PlayState.instance.hudThings.visible = PlayState.instance.notes.visible = false;
-	} else if (n == 16) {
+	} else if (n == 9) {
 		//preload the closeup sheet
-		new Character(0, 0, "monika", false, "ve_datastream", false).destroy();
+		//var a = new Character(0, 0, "monika-ds-front", false, PlayState.instance.dad.myMod, true, false);
+		//a.alpha = 0.00001;
+		//a.scale.set(0.001, 0.001);
+		//PlayState.instance.add(a);
+		Character.activeArray[3].setGraphicSize(1, 1);
 		//and sync vocals
 		PlayState.instance.resyncVocals();
 	} else if (n == 32) {
@@ -458,6 +462,7 @@ function beatHit(n) {
 	} else if (n == 674) {
 		HudTear = photosensitive ? 6 : 12;
 		Disintegrate = photosensitive ? 0.5 : 1.2;
+		PlayState.instance.dad.playAnim("last");
 	} else if (n == 682) {
 		HudTear = photosensitive ? 12 : 30;
 		PlayState.instance.dad.shader = fuckOutline;

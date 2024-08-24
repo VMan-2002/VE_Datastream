@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Doki_BigMonikaNonPixel_Assets.png">
+	<!-- Created with Adobe Animate version 19.1.0.349 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Big Monika Idle0000" x="4302" y="3618" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0001" x="4667" y="4533" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0002" x="4960" y="3618" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0003" x="5020" y="2" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0004" x="5020" y="917" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0005" x="5020" y="1832" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0006" x="5325" y="4533" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0007" x="5325" y="4533" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0008" x="5618" y="2747" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0009" x="5618" y="2747" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0010" x="5678" y="2" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0011" x="5678" y="2" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0012" x="5678" y="2" width="652" height="909"/>
+	<SubTexture name="Big Monika Idle0013" x="5678" y="2" width="652" height="909"/>
+	<SubTexture name="Big Monika Last Note0000" x="5983" y="5390" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0001" x="5983" y="5390" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0002" x="4667" y="5448" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0003" x="4667" y="5448" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0004" x="5293" y="5448" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0005" x="5293" y="5448" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0006" x="5919" y="6248" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0007" x="5919" y="6248" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0008" x="4667" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0009" x="4667" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0010" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0011" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0012" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0013" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0014" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0015" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0016" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0017" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0018" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0019" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0020" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0021" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0022" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0023" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0024" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0025" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0026" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0027" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0028" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0029" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0030" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0031" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0032" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0033" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0034" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note0035" x="5293" y="6306" width="620" height="852"/>
+	<SubTexture name="Big Monika Last Note First0000" x="1077" y="6225" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0001" x="1077" y="6225" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0002" x="1077" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0003" x="1077" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0004" x="2152" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0005" x="2152" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0006" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0007" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0008" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0009" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0010" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0011" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0012" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0013" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0014" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0015" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0016" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0017" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0018" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0019" x="2152" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0020" x="2152" y="1780" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0021" x="2152" y="1780" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0022" x="2152" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0023" x="2152" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0024" x="2152" y="3558" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0025" x="2152" y="4447" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0026" x="2152" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0027" x="2152" y="6225" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0028" x="2152" y="6225" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0029" x="2152" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0030" x="2152" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0031" x="3227" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0032" x="3227" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0033" x="2152" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0034" x="2152" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0035" x="3227" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0036" x="3227" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0037" x="2152" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0038" x="2152" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0039" x="3227" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0040" x="3227" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0041" x="2152" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0042" x="2152" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0043" x="3227" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0044" x="3227" y="1780" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0045" x="3227" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0046" x="3227" y="3558" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0047" x="3227" y="4447" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0048" x="3227" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0049" x="3227" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0050" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0051" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0052" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0053" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0054" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note First0055" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0000" x="2" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0001" x="2" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0002" x="2" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0003" x="2" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0004" x="2" y="1780" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0005" x="2" y="1780" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0006" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0007" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0008" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0009" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0010" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0011" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0012" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0013" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0014" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0015" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0016" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0017" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0018" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0019" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0020" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0021" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0022" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0023" x="2" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0024" x="2" y="3558" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0025" x="2" y="3558" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0026" x="2" y="4447" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0027" x="2" y="4447" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0028" x="2" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0029" x="2" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0030" x="2" y="6225" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0031" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0032" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0033" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0034" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0035" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0036" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0037" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0038" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0039" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0040" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0041" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0042" x="2" y="7114" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0043" x="1077" y="2" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0044" x="1077" y="891" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0045" x="1077" y="1780" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0046" x="1077" y="2669" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0047" x="1077" y="3558" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0048" x="1077" y="4447" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0049" x="1077" y="4447" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0050" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0051" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0052" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0053" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0054" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Last Note Shrug0055" x="1077" y="5336" width="1069" height="883"/>
+	<SubTexture name="Big Monika Sing Down0000" x="5678" y="917" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0001" x="5678" y="917" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0002" x="5678" y="1781" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0003" x="5678" y="1781" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0004" x="5618" y="3662" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0005" x="5618" y="3662" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0006" x="5983" y="4526" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0007" x="5983" y="4526" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0008" x="5983" y="4526" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0009" x="5983" y="4526" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0010" x="5983" y="4526" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0011" x="5983" y="4526" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0012" x="5983" y="4526" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Down0013" x="5983" y="4526" width="634" height="858"/>
+	<SubTexture name="Big Monika Sing Left0000" x="4302" y="2" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0001" x="4302" y="2" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0002" x="4302" y="906" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0003" x="4302" y="1810" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0004" x="4302" y="1810" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0005" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0006" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0007" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0008" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0009" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0010" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0011" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0012" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0013" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Left0014" x="4302" y="2714" width="712" height="898"/>
+	<SubTexture name="Big Monika Sing Right0000" x="3227" y="6225" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0001" x="3227" y="6225" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0002" x="3947" y="6225" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0003" x="3947" y="6225" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0004" x="3227" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0005" x="3227" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0006" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0007" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0008" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0009" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0010" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0011" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0012" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0013" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0014" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Right0015" x="3947" y="7149" width="714" height="918"/>
+	<SubTexture name="Big Monika Sing Up0000" x="6276" y="2645" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0001" x="6276" y="2645" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0002" x="6318" y="917" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0003" x="6318" y="917" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0004" x="6336" y="2" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0005" x="6336" y="2" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0006" x="6276" y="3517" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0007" x="6276" y="3517" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0008" x="6276" y="3517" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0009" x="6276" y="3517" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0010" x="6276" y="3517" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0011" x="6276" y="3517" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0012" x="6276" y="3517" width="621" height="866"/>
+	<SubTexture name="Big Monika Sing Up0013" x="6276" y="3517" width="621" height="866"/>
+</TextureAtlas>
